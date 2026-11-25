@@ -1,0 +1,59 @@
+[
+  {
+    "id": "partial-alias-write",
+    "events": [
+      {
+        "kind": "forward"
+      },
+      {
+        "kind": "write",
+        "storage_id": "storage",
+        "addresses": [
+          40,
+          41
+        ],
+        "value": 2
+      },
+      {
+        "kind": "backward"
+      },
+      {
+        "kind": "write",
+        "storage_id": "storage",
+        "addresses": [
+          5,
+          6
+        ],
+        "value": 3
+      },
+      {
+        "kind": "backward"
+      }
+    ]
+  },
+  {
+    "id": "invalid-write",
+    "events": [
+      {
+        "kind": "write_view",
+        "view_id": "broadcast",
+        "value": 0
+      },
+      {
+        "kind": "query_storage"
+      }
+    ]
+  },
+  {
+    "id": "budget-refusal",
+    "events": [
+      {
+        "kind": "execute",
+        "workspace_bytes": 64
+      },
+      {
+        "kind": "query_external_outputs"
+      }
+    ]
+  }
+]

@@ -1,0 +1,10 @@
+{
+  "product": "共享张量视图的激活融合与自动微分",
+  "provenance": "所有数值、实体和事件均为本地合成资料，不代表真实用户或已发生事故。",
+  "format_revision": 1,
+  "tensors": {
+    "storage": "data/tensors/storage.json",
+    "scale": "data/tensors/scale.json",
+    "upstream": "data/tensors/upstream.json"
+  }
+}

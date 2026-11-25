@@ -1,0 +1,32 @@
+{
+  "type": "object",
+  "required": [
+    "shape",
+    "dtype",
+    "values"
+  ],
+  "properties": {
+    "shape": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
+    "dtype": {
+      "enum": [
+        "float32",
+        "float64",
+        "int8",
+        "uint8",
+        "int64"
+      ]
+    },
+    "values": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
+    }
+  }
+}
