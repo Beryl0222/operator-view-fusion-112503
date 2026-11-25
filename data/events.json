@@ -45,7 +45,7 @@
     ]
   },
   {
-    "id": "budget-refusal",
+    "id": "small-budget",
     "events": [
       {
         "kind": "execute",
