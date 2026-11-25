@@ -1,122 +1,43 @@
 {
-  "views": [
+  "images": [
     {
-      "view_id": "a",
-      "storage_id": "storage",
-      "offset": 0,
-      "shape": [
-        3,
-        4
-      ],
-      "strides": [
-        4,
-        1
-      ]
+      "image_id": "img-a",
+      "row": 0,
+      "valid_height": 14,
+      "valid_width": 19,
+      "byte_budget": 1024,
+      "max_weighted_mse": 80,
+      "source_file": "data/images/img-a.pgm",
+      "weight": 2
     },
     {
-      "view_id": "b",
-      "storage_id": "storage",
-      "offset": 4,
-      "shape": [
-        3,
-        4
-      ],
-      "strides": [
-        4,
-        1
-      ]
-    },
-    {
-      "view_id": "reverse",
-      "storage_id": "storage",
-      "offset": 11,
-      "shape": [
-        3,
-        4
-      ],
-      "strides": [
-        -4,
-        -1
-      ]
-    },
-    {
-      "view_id": "broadcast",
-      "storage_id": "storage",
-      "offset": 20,
-      "shape": [
-        3,
-        4
-      ],
-      "strides": [
-        0,
-        1
-      ]
-    },
-    {
-      "view_id": "empty",
-      "storage_id": "storage",
-      "offset": 0,
-      "shape": [
-        0,
-        4
-      ],
-      "strides": [
-        4,
-        1
-      ]
+      "image_id": "img-b",
+      "row": 1,
+      "valid_height": 17,
+      "valid_width": 9,
+      "byte_budget": 128,
+      "max_weighted_mse": 50,
+      "source_file": "data/images/img-b.pgm",
+      "weight": 1
     }
   ],
-  "expression": {
-    "inputs": [
-      "a",
-      "b",
-      "scale"
-    ],
-    "nodes": [
-      {
-        "id": "n1",
-        "op": "silu",
-        "inputs": [
-          "a"
-        ]
-      },
-      {
-        "id": "n2",
-        "op": "multiply",
-        "inputs": [
-          "n1",
-          "b"
-        ]
-      },
-      {
-        "id": "n3",
-        "op": "add",
-        "inputs": [
-          "n2",
-          "scale"
-        ]
-      },
-      {
-        "id": "n4",
-        "op": "sum",
-        "inputs": [
-          "n3"
-        ],
-        "axis": 1,
-        "keepdims": false
-      }
-    ],
-    "outputs": [
-      "n3",
-      "n4"
-    ],
-    "requested_gradients": [
-      "storage"
-    ]
-  },
-  "budgets_bytes": [
-    64,
-    256,
-    4194304
-  ]
+  "quantization_configs": [
+    {
+      "config_id": "fine",
+      "tensor": "table_fine"
+    },
+    {
+      "config_id": "medium",
+      "tensor": "table_medium"
+    },
+    {
+      "config_id": "coarse",
+      "tensor": "table_coarse"
+    }
+  ],
+  "consumers": [
+    "classification",
+    "distillation"
+  ],
+  "image_revision": "image-v1"
 }

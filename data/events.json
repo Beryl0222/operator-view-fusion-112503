@@ -1,58 +1,45 @@
 [
   {
-    "id": "partial-alias-write",
+    "id": "mixed-image-window",
     "events": [
       {
-        "kind": "forward"
+        "kind": "encode_window",
+        "image_ids": [
+          "img-a",
+          "img-b"
+        ]
       },
       {
-        "kind": "write",
-        "storage_id": "storage",
-        "addresses": [
-          40,
-          41
-        ],
-        "value": 2
+        "kind": "query_effective_weight"
       },
       {
-        "kind": "backward"
-      },
-      {
-        "kind": "write",
-        "storage_id": "storage",
-        "addresses": [
-          5,
-          6
-        ],
-        "value": 3
-      },
-      {
-        "kind": "backward"
+        "kind": "backward",
+        "consumer": "classification"
       }
     ]
   },
   {
-    "id": "invalid-write",
+    "id": "shared-forward-change",
     "events": [
       {
-        "kind": "write_view",
-        "view_id": "broadcast",
-        "value": 0
+        "kind": "encode",
+        "image_id": "img-a",
+        "consumers": [
+          "classification",
+          "distillation"
+        ]
       },
       {
-        "kind": "query_storage"
-      }
-    ]
-  },
-  {
-    "id": "small-budget",
-    "events": [
-      {
-        "kind": "execute",
-        "workspace_bytes": 64
+        "kind": "change_pixel",
+        "image_id": "img-a",
+        "x": 4,
+        "y": 4,
+        "value": 255,
+        "new_revision": "image-v2"
       },
       {
-        "kind": "query_external_outputs"
+        "kind": "backward",
+        "consumer": "distillation"
       }
     ]
   }

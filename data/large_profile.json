@@ -1,0 +1,33 @@
+{
+  "id": "maximum-gray-image",
+  "parameters": {
+    "image_id": "image-large",
+    "valid_height": 512,
+    "valid_width": 512,
+    "byte_budget": 131072,
+    "max_weighted_mse": 100
+  },
+  "arrays": {
+    "image": {
+      "shape": [
+        1,
+        512,
+        512
+      ],
+      "pattern": "integers",
+      "dtype": "float32",
+      "low": 0,
+      "high": 256
+    },
+    "importance": {
+      "shape": [
+        1,
+        512,
+        512
+      ],
+      "pattern": "constant",
+      "dtype": "float32",
+      "value": 1
+    }
+  }
+}

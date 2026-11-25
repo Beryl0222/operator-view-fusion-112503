@@ -1,14 +1,15 @@
-"""验证业务输入之间的引用关系及形状，不计算目标输出。"""
+"""核对合成输入的业务引用及文件一致性。"""
 import numpy as np
 from support.inspect_data import load_bundle
 
-def test_linked_materials():
+def test_context():
     _, arrays, r, scenarios = load_bundle()
-    size=arrays['storage'].size
-    for view in r['views']:
-        assert len(view['shape']) == len(view['strides'])
-        for index in np.ndindex(*view['shape']):
-            address=view['offset']+sum(i*s for i,s in zip(index,view['strides']))
-            assert 0<=address<size
-    nodes={n['id'] for n in r['expression']['nodes']}
-    assert set(r['expression']['outputs'])<=nodes
+    from PIL import Image
+    from pathlib import Path
+    root=Path(__file__).resolve().parents[1]
+    for image in r['images']:
+        source=np.asarray(Image.open(root/image['source_file']))
+        h,w=image['valid_height'],image['valid_width']
+        assert source.shape == (h,w)
+        assert np.array_equal(source,arrays['images'][image['row'],:h,:w])
+    assert all(np.all(arrays[c['tensor']]>0) for c in r['quantization_configs'])
