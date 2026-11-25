@@ -1,6 +1,6 @@
 # 数据及数值约定
 
-输入storage是一维float32/64数组，view由storage_id、offset、shape、strides（元素单位）定义，访问地址需落在storage内。表达式节点支持add、multiply、silu、sum以及view；sum可给axis/keepdims，空和为零，广播遵循NumPy规则。外部write仅接受地址唯一视图，其标量或同shape值赋到所有地址，整个写操作失败不改变存储。建图时绑定输入所触达地址的值版本，执行前相关地址变更使图失效；前向完成后的反向仅拒绝其实际数学依赖值被更改的情形。silu=x/(1+exp(-x))；float64前后向rtol=1e-7、atol=1e-9，float32 rtol=3e-4、atol=3e-5。公开示例的预算包括优化器保存值、临时广播/复制和反向重算中间值。
+输入storage是一维float32/64数组，view由storage_id、offset、shape、strides（元素单位）定义，访问地址需落在storage内。表达式节点支持add、multiply、silu、sum以及view；sum可给axis/keepdims，空和为零，广播遵循NumPy规则。外部write仅接受地址唯一视图，其标量或同shape值赋到所有地址，整个写操作失败不改变存储。建图时绑定输入所触达地址的值版本，执行前相关地址变更使图失效；前向完成后的反向仅拒绝其实际数学依赖值被更改的情形。silu=x/(1+exp(-x))；float64前后向rtol=1e-7、atol=1e-9，float32 rtol=3e-4、atol=3e-5。公开示例的预算包括执行器保存值、临时广播/复制和反向重算中间值。
 
 ## 本地数据
 
